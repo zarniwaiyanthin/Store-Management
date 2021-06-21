@@ -14,6 +14,7 @@ class ProductViewModel:BaseViewModel() {
     val error=MutableLiveData<String>()
     val productList=MutableLiveData<List<Product>>()
     val responseMessage=MutableLiveData<String>()
+    val isDelete=MutableLiveData<Boolean>()
 
     fun getProductList(userId:Int){
         isLoading.value=true
@@ -96,8 +97,11 @@ class ProductViewModel:BaseViewModel() {
                         if (response.isSuccessful){
                             response.body()?.let {
                                 responseMessage.value=it.responseMessage
+                                isDelete.value=it.data?:false
  //                               error.value=it.error?.firstOrNull()?.errorMessage?:"Unknown Error"
                             }
+                        }else{
+                            isDelete.value=false
                         }
                     }
                 })

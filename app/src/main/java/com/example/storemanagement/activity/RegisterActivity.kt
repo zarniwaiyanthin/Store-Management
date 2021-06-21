@@ -9,7 +9,11 @@ import androidx.lifecycle.Observer
 import com.example.storemanagement.R
 import com.example.storemanagement.data.request.RegisterRequest
 import com.example.storemanagement.viewmodel.RegisterViewModel
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register.etName
+import kotlinx.android.synthetic.main.activity_register.etPassword
+import kotlinx.android.synthetic.main.activity_register.progressBar
 
 class RegisterActivity:BaseActivity() {
     companion object{
@@ -46,6 +50,11 @@ class RegisterActivity:BaseActivity() {
                     registerViewModel.registerUser(req)
                 }
             }
+        }
+
+        tvLogin.setOnClickListener {
+            startActivity(LoginActivity.newIntent(this))
+            finish()
         }
 
         registerViewModel.responseMessage.observe(this, Observer {

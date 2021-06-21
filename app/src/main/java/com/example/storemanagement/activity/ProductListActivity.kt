@@ -61,6 +61,15 @@ class ProductListActivity:BaseActivity(),ProductListListener {
             Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
         })
 
+        productViewModel.isDelete.observe(this, Observer {isDelete->
+            if (isDelete){
+                val pref=getSharedPreferences(Constants.SHARE_PREF_NAME, Context.MODE_PRIVATE)
+                val userId=pref.getInt(Constants.KEY_USER_ID,-1)
+
+                productViewModel.getProductList(userId)
+            }
+        })
+
         tbProductList.setNavigationOnClickListener {
             onBackPressed()
         }
